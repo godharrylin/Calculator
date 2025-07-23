@@ -1,3 +1,11 @@
+    /* 計算機字體 */
+    @font-face {
+      font-family: 'Digital7';
+      src: url('../fonts/digital-7.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    
     /* 設定100% 才能讓 justify-content-center 才能讓他上下左右螢幕置中 */
     body, html {
       height: 100%;
@@ -45,3 +53,15 @@
       font-size: 20px;
       border: 3px solid rgb(150, 15, 143);
     }
+
+  .calc-text {
+    font-family: 'Digital7', monospace;
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: rgb(53, 145, 53);               /* 綠色像電子顯示器 */
+    background-color: #000;   /* 黑底 */
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: right;
+  }
