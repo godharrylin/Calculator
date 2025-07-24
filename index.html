@@ -13,12 +13,12 @@
     <!-- Display Area -->
     <div class="display-area">
       <div class="display-row">
-        <div class="label-box"></div>
-        <div class="input-box calc-text">999</div>
+        <div class="label-box">TW</div>
+        <div id="major" class="input-box calc-text">999</div>
       </div>
       <div class="display-row">
-        <div class="label-box"></div>
-        <div class="input-box calc-text">123+456</div>
+        <div class="label-box">US</div>
+        <div id="minor" class="input-box calc-text">123+456</div>
       </div>
     </div>
 
@@ -26,36 +26,36 @@
     <div class="button-grid">
       <!-- 第一列 -->
       <button id='btn_clean' class="btn btn-custom-dark">C</button>
-      <button class="btn btn-custom-dark">&larr;</button>
+      <button id='btn_back' class="btn btn-custom-dark">&larr;</button>
       <button class="btn btn-custom-dark">&uarr;&darr;</button>
       <button class="btn btn-custom-dark">&divide;</button>
 
       <!-- 第二列 -->
-      <button class="btn btn-custom-dark">7</button>
-      <button class="btn btn-custom-dark">8</button>
-      <button class="btn btn-custom-dark">9</button>
+      <button class="number btn btn-custom-dark">7</button>
+      <button class="number btn btn-custom-dark">8</button>
+      <button class="number btn btn-custom-dark">9</button>
       <button class="btn btn-custom-dark">&times;</button>
 
       <!-- 第三列 -->
-      <button class="btn btn-custom-dark">4</button>
-      <button class="btn btn-custom-dark">5</button>
-      <button class="btn btn-custom-dark">6</button>
+      <button class="number btn btn-custom-dark">4</button>
+      <button class="number btn btn-custom-dark">5</button>
+      <button class="number btn btn-custom-dark">6</button>
       <button class="btn btn-custom-dark">-</button>
 
       <!-- 第四列 -->
-      <button class="btn btn-custom-dark">1</button>
-      <button class="btn btn-custom-dark">2</button>
-      <button class="btn btn-custom-dark">3</button>
+      <button class="number btn btn-custom-dark">1</button>
+      <button class="number btn btn-custom-dark">2</button>
+      <button class="number btn btn-custom-dark">3</button>
       <button class="btn btn-custom-dark">+</button>
 
       <!-- 第五列 -->
-      <button class="btn btn-custom-dark">0</button>
-      <button class="btn btn-custom-dark">.</button>
+      <button class="number btn btn-custom-dark">0</button>
+      <button id="floatDot" class="btn btn-custom-dark">.</button>
       <button class="btn btn-custom-dark">%</button>
       <button class="btn btn-custom-dark">=</button>
     </div>
 
   </div>
-  <link rel="javascript" href="js/main.js">
+  <script src="js/main.js"></script>
 </body>
 </html>
