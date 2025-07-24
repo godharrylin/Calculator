@@ -1,6 +1,7 @@
 /* global variables */
 
-let val_1 = 0;
+let left_operand = {value: 0};
+let right_operand = {value: 0};
 
 
 
