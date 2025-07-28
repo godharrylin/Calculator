@@ -14,11 +14,11 @@
     <div class="display-area">
       <div class="display-row">
         <div class="label-box">TW</div>
-        <div id="major" class="input-box calc-text">999</div>
+        <div id="major" class="input-box calc-text">0</div>
       </div>
       <div class="display-row">
         <div class="label-box">US</div>
-        <div id="minor" class="input-box calc-text">123+456</div>
+        <div id="minor" class="input-box calc-text">0</div>
       </div>
     </div>
 
@@ -27,35 +27,38 @@
       <!-- 第一列 -->
       <button id='btn_clean' class="btn btn-custom-dark">C</button>
       <button id='btn_back' class="btn btn-custom-dark">&larr;</button>
-      <button class="btn btn-custom-dark">&uarr;&darr;</button>
-      <button class="btn btn-custom-dark">&divide;</button>
+      <button id='btn_exchange' class="btn btn-custom-dark">&uarr;&darr;</button>
+      <button id="divide" class="operator btn btn-custom-dark">&divide;</button>
 
       <!-- 第二列 -->
       <button class="number btn btn-custom-dark">7</button>
       <button class="number btn btn-custom-dark">8</button>
       <button class="number btn btn-custom-dark">9</button>
-      <button class="btn btn-custom-dark">&times;</button>
+      <button id="multiple" class="operator btn btn-custom-dark">&times;</button>
 
       <!-- 第三列 -->
       <button class="number btn btn-custom-dark">4</button>
       <button class="number btn btn-custom-dark">5</button>
       <button class="number btn btn-custom-dark">6</button>
-      <button class="btn btn-custom-dark">-</button>
+      <button id="sub" class="operator btn btn-custom-dark">-</button>
 
       <!-- 第四列 -->
       <button class="number btn btn-custom-dark">1</button>
       <button class="number btn btn-custom-dark">2</button>
       <button class="number btn btn-custom-dark">3</button>
-      <button class="btn btn-custom-dark">+</button>
+      <button id="add" class="operator btn btn-custom-dark">+</button>
 
       <!-- 第五列 -->
       <button class="number btn btn-custom-dark">0</button>
       <button id="floatDot" class="btn btn-custom-dark">.</button>
-      <button class="btn btn-custom-dark">%</button>
-      <button class="btn btn-custom-dark">=</button>
+      <button id="persent" class="btn btn-custom-dark">%</button>
+      <button id="equal" class="btn btn-custom-dark">=</button>
     </div>
 
   </div>
+
+  <!-- 精確計算浮點數的套件 -->
+  <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.4.3/decimal.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
