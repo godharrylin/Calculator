@@ -114,32 +114,6 @@ document.getElementById('persent').addEventListener('click', function(){
 
 })
 
-/* modal */
-const countryList = document.getElementById('countryList');
-const countrySearch = document.getElementById('countrySearch');
-const usLabel = document.getElementById('usLabel');
-const countryItems = countryList.getElementsByTagName('li');
-
-// 即時搜尋
-countrySearch.addEventListener('input', () => {
-    const query = countrySearch.value.toLowerCase();
-    Array.from(countryItems).forEach(item => {
-        const country = item.textContent.toLowerCase();
-        item.style.display = country.includes(query) ? '' : 'none';
-    });
-});
-
-// 點選國家時，更新標籤並關閉 Modal
-Array.from(countryItems).forEach(item => {
-    item.addEventListener('click', () => {
-        const selectedCountry = item.textContent;
-        usLabel.textContent = selectedCountry;
-
-        // 關閉 Modal
-        const modalElement = bootstrap.Modal.getInstance(document.getElementById('countryModal'));
-        modalElement.hide();
-    });
-});
 
 /* function */
 //  貨幣轉換
@@ -210,6 +184,5 @@ function ShowCalculateReusltOnScreen(){
 function ShowResultOnScreen(){
     const inputBox = document.getElementById('major');
     inputBox.textContent = cur_operand.value;
-
 
 }

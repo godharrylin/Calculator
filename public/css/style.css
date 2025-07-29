@@ -53,6 +53,9 @@
       font-size: 20px;
       border: 2px solid rgb(226, 226, 226);
     }
+    .label-box{
+      cursor: pointer;
+    }
 
   /* 文字字體 */
   .calc-text {
