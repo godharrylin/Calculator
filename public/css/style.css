@@ -88,3 +88,25 @@
   border-color: #000000;
   box-shadow: none;            /* 移除 Bootstrap 預設 focus 陰影（可選） */
   }
+
+
+
+/* country list page */
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+
+#countryList li {
+  padding: 8px;
+  cursor: pointer;
+  list-style: none;
+}
+
+#countryList li:hover {
+  background-color: #f0f0f0;
+}
