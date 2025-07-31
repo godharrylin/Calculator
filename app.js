@@ -1,15 +1,43 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { preloadCountries, getCountries } from './services/countriesService.js'
+
 const app = express();
-const indexRouter = require('./routes/index');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-app.set('view engine', 'ejs')                       //  告訴Express 要用 ejs 作為樣板引擎
-app.set('views', path.join(__dirname, 'views'));    //  設定樣板檔案(ejs)的位置
 
-app.use(express.static(path.join(__dirname, 'public')));    //  設定靜態資源檔位置
-app.use('/', indexRouter);  //  路由設定
+
+// 匯入路由
+import indexRouter from './routes/index.js'; // 要加 `.js` 副檔名，ESM 模式必須明確指定副檔名
+import { getStatus } from './services/countriesService.js';
+
+// 設定 EJS 模板引擎與目錄
+app.set('view engine', 'ejs');
+app.set('views', join(__dirname, 'views'));
+
+// 設定靜態資源目錄
+app.use(express.static(join(__dirname, 'public')));
+
+
+
+
+//  先產生資料
+await preloadCountries();
+
+//  送資料到 index.js
+app.use('/index', (req, res, next) =>{
+    req.status = getStatus();
+    req.countries = getCountries();
+    next();
+});
+
+// 設定路由
+app.use('/', indexRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running at http://localhost:${port}/index`);
 });
+

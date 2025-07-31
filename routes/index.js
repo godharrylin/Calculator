@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
 
-router.get('/', (req, res) =>{
-    // res.send('Welcome from indexRouter!');
-    res.render('index');  
-})
+router.get('/index', async (req, res) =>{
+    console.log(req.countries);
+    res.render('index', { countries: req.countries, status: req.status });  
+});
 
-module.exports = router;
+export default router;

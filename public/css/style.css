@@ -103,6 +103,12 @@
   border-radius: 8px;
 }
 
+#countryList {
+  max-height: 400px;       /* 自訂高度，可調整 */
+  overflow-y: auto;        /* 垂直滾動條 */
+  padding: 0;
+  margin: 0;
+}
 
 #countryList li {
   padding: 8px;
