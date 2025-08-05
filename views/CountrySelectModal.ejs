@@ -9,14 +9,18 @@
         <div class="modal-body">
         <input type="text" id="countrySearch" class="form-control mb-3" placeholder="搜尋國家">
         <ul id="countryList" class="list-group">
-            <li class="list-group-item">United States</li>
-            <li class="list-group-item">Canada</li>
-            <li class="list-group-item">Japan</li>
-            <li class="list-group-item">Germany</li> 
-            <li class="list-group-item">Taiwan</li>
-            <li class="list-group-item">South Korea</li>
-            <li class="list-group-item">Australia</li>
-            <li class="list-group-item">France</li>
+            <% countries.forEach(c => { %>
+                <li id="<%= c.cca3 %>" class="list-group-item" data-flag="<%= c.flags %>">
+                    <div class="country">
+                        <div class="country-img">
+                            <img src= "<%= c.flags %>" alt="<%= c.name %>">
+                        </div>
+                        <div class="country-text">
+                            <span><%= c.name %></span>
+                        </div>   
+                    </div>    
+                </li>
+            <% }) %>
         </ul>
         </div>
     </div>

@@ -28,13 +28,17 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     });
 
+    
     //  點選國家項目
     Array.from(countryItems).forEach(item => {
         item.addEventListener('click', function(){
-            const selectedCountry = item.textContent;
-            
+            const countryFlag = item.dataset.flag;
+            console.log(activeLabel);
             if(activeLabel){
-                activeLabel.textContent = selectedCountry;
+
+                const flagImg = activeLabel.querySelector('.country-ratio-img');;
+                flagImg.src = countryFlag;
+                console.log(countryFlag);
             }
 
             bsModal.hide();
