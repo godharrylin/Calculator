@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', function(){
     const modalElement = document.getElementById('countryModal');
     const bsModal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
 
+    //  關閉 modal 前自動滾到上方
+    modalElement.addEventListener('hide.bs.modal', function(){
+        if(countryList){
+            countryList.scrollTop = 0;
+        }
+        
+    });
+
+
     //  即時搜尋
     countrySearch?.addEventListener('input', () =>{
         const query = countrySearch.value.toLowerCase();
