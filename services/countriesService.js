@@ -6,7 +6,7 @@ export async function preloadCountries() {
 
     try{
         const url = new URL('https://restcountries.com/v3.1/all');
-        url.searchParams.append('fields', 'name,cca3,flags');
+        url.searchParams.append('fields', 'name,cca3,flags,currencies');
 
         const response = await fetch(url.toString());
         status = response.status;
@@ -14,7 +14,8 @@ export async function preloadCountries() {
             data.map(country => ({
                 name: country.name.common,
                 cca3: country.cca3,
-                flags: country.flags.svg
+                flags: country.flags.svg,
+                currencies: Object.keys(country.currencies)     //  獲取該國家使用的幣別名稱 (可能不只一種)
             }))
         );
         console.log('fetching the country data');

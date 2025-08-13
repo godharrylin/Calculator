@@ -2,6 +2,7 @@ import express from 'express';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { preloadCountries, getCountries } from './services/countriesService.js'
+import { preloadRatioData, bindingRatioAndCountry } from './services/ratioConverService.js'
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -25,11 +26,13 @@ app.use(express.static(join(__dirname, 'public')));
 
 //  先產生資料
 await preloadCountries();
+await preloadRatioData();
 
 //  送資料到 index.js
 app.use('/index', (req, res, next) =>{
     req.status = getStatus();
-    req.countries = getCountries();
+    req.countries = bindingRatioAndCountry(getCountries());
+    
     next();
 });
 
