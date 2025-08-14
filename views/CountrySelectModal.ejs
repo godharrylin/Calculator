@@ -1,0 +1,31 @@
+<!-- Modal 結構 -->
+<div class="modal fade" id="countryModal" aria-labelledby="countryModalLabel">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title">選擇國家</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="關閉"></button>
+        </div>
+        <div class="modal-body">
+        <input type="text" id="countrySearch" class="form-control mb-3" placeholder="搜尋國家">
+        <ul id="countryList" class="list-group">
+            <% countries.forEach(c => { %>
+                <li id="<%= c.cca3 %>" class="list-group-item" data-flag="<%= c.flags %>">
+                    <div class="country">
+                        <div class="country-img">
+                            <img src= "<%= c.flags %>" alt="<%= c.name %>">
+                        </div>
+                        <div class="country-text">
+                            <span><%= c.name %></span>
+                        </div>   
+                    </div>    
+                </li>
+            <% }) %>
+        </ul>
+        </div>
+    </div>
+    </div>
+</div>
+<script id="countries-data" type="application/json">
+    <%- JSON.stringify(countries) %>
+</script>
