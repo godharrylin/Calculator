@@ -5,6 +5,11 @@ let right_operand = {value: ""};
 let cur_operand = left_operand;
 let operator = "";
 
+let countries =[];
+const major_img = document.getElementById('major-img');
+const minor_img = document.getElementById('minor-img');
+const major_inputBox = document.getElementById('major');
+const minor_inputBox = document.getElementById('minor');
 
 
 /* click evnet of buttons */
@@ -21,18 +26,16 @@ document.getElementById('btn_clean').addEventListener('click', function(){
 
 //  back
 document.getElementById('btn_back').addEventListener('click', function(){
-    const inputBox = document.getElementById('major');
-    let str = inputBox.textContent;
-
-    if(str.length === 1){
-        inputBox.textContent = '0';
+    
+    let val = cur_operand.value;
+    if(val.length === 1){
+        cur_operand.value = '0';
     }
     else{
-        inputBox.textContent = str.substring(0, str.length-1);
+        cur_operand.value = val.substring(0, val.length-1);
     }
 
-    Convertor();
-
+    ShowResultOnScreen();
     return;
 })
 
@@ -115,10 +118,28 @@ document.getElementById('persent').addEventListener('click', function(){
 })
 
 
-/* function */
-//  貨幣轉換
-function Convertor(){
+//  載入DOM後，解析 countries data
+document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById('countries-data');
+    if(!el) return;
+    countries = JSON.parse(el.textContent || '[]');
+});
 
+
+
+/* ------------------- function ------------------- */
+//  貨幣轉換
+function Convertor(val){
+    major = countries.find( c => c.cca3 === major_img.dataset.code);
+    minor = countries.find( c => c.cca3 === minor_img.dataset.code);
+    
+    const major_rate = new Decimal(Object.values(major.currencies)[0]);
+    const minor_rate = new Decimal(Object.values(minor.currencies)[0]);
+
+    const ratio = minor_rate.dividedBy(major_rate);
+    let value = new Decimal(val);
+
+    return res = value.times(ratio);
 }
 
 //  檢查最大顯示長度
@@ -175,14 +196,14 @@ function Reset(res){
 
 function ShowCalculateReusltOnScreen(){
 
-    if(operator === ""){
+    // if(operator === ""){
         ShowResultOnScreen();
-    }
+    // }
 }
 
 
 function ShowResultOnScreen(){
-    const inputBox = document.getElementById('major');
-    inputBox.textContent = cur_operand.value;
-
+    major_inputBox.textContent = cur_operand.value;
+    minor_inputBox.textContent = String(Convertor(cur_operand.value));
 }
+

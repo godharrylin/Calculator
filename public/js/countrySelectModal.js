@@ -38,15 +38,14 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     
-    //  點選國家項目
+    //  點選國家項目，會顯示到計算機上，並關閉 modal 視窗
     Array.from(countryItems).forEach(item => {
         item.addEventListener('click', function(){
             const countryFlag = item.dataset.flag;
-            console.log(activeLabel);
             if(activeLabel){
-
                 const flagImg = activeLabel.querySelector('.country-ratio-img');;
                 flagImg.src = countryFlag;
+                flagImg.dataset.code = item.id;
                 console.log(countryFlag);
             }
 
