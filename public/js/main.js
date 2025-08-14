@@ -12,8 +12,7 @@ const major_inputBox = document.getElementById('major');
 const minor_inputBox = document.getElementById('minor');
 
 
-/* click evnet of buttons */
-
+/* --------------------- click evnet of buttons ----------------------- */
 //  C 
 document.getElementById('btn_clean').addEventListener('click', function(){
     const inputBoxes = document.querySelectorAll('.calc-text');
@@ -62,9 +61,18 @@ document.querySelectorAll('.number').forEach(btn =>
 }))
 
 //  Exchange
-// document.getElmenetById('btn_exchange').addEventListener('click', function(){
-    
-// })
+document.getElementById('btn_exchange').addEventListener('click', function(){
+    const tmp_src = major_img.getAttribute('src');
+    const tmp_code = major_img.dataset.code;
+
+    major_img.src = minor_img.src;
+    major_img.dataset.code = minor_img.dataset.code;
+
+    minor_img.src = tmp_src;
+    minor_img.dataset.code = tmp_code;
+
+    ShowResultOnScreen();
+})
 
 //  float dot
 document.getElementById('floatDot').addEventListener('click', function(){
