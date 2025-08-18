@@ -131,11 +131,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById('countries-data');
     if(!el) return;
     countries = JSON.parse(el.textContent || '[]');
+
+    InitExchangeRates();
 });
 
 
 
 /* ------------------- function ------------------- */
+//  初始化國家匯率
+function InitExchangeRates(){
+    major = countries.find( c => c.cca3 === "TWN");
+    minor = countries.find( c => c.cca3 === "USA");
+
+    major_img.src = major.flags;
+    major_img.dataset.code = major.cca3;
+
+    minor_img.src = minor.flags;
+    minor_img.dataset.code = minor.cca3;
+
+}
+
 //  貨幣轉換
 function Convertor(val){
     major = countries.find( c => c.cca3 === major_img.dataset.code);
