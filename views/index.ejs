@@ -5,6 +5,11 @@
     <title>Calculator Layout</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css" />
+
+    <% const majorFlag = majorData?.flags; %>
+    <% const minorFlag = minorData?.flags; %>
+    <!-- <link rel="preload" as="image" href="<%= majorFlag %>" crossorigin="anonymous">
+    <link rel="preload" as="image" href="<%= minorFlag %>" crossorigin="anonymous"> -->
 </head>
 <body class="d-flex justify-content-center align-items-center">
 
@@ -14,13 +19,13 @@
     <div class="display-area">
       <div class="display-row">
         <div class="label-box" data-bs-toggle="modal" data-bs-target="#countryModal">
-          <img id="major-img" class="country-ratio-img" data-code="" src="">
+          <img id="major-img" class="country-ratio-img" data-code="<%= majorData.cca3 %>" src="<%= majorFlag %>">
         </div>
         <div id="major" class="input-box calc-text">0</div>
       </div>
       <div class="display-row">
         <div class="label-box" data-bs-toggle="modal" data-bs-target="#countryModal">
-          <img id="minor-img" class="country-ratio-img" data-code="" src="">
+          <img id="minor-img" class="country-ratio-img" data-code="<%= minorData.cca3 %>" src="<%= minorFlag %>">
         </div>
         <div id="minor" class="input-box calc-text">0</div>
       </div>

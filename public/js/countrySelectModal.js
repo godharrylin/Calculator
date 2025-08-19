@@ -46,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 const flagImg = activeLabel.querySelector('.country-ratio-img');;
                 flagImg.src = countryFlag;
                 flagImg.dataset.code = item.id;
-                console.log(countryFlag);
             }
 
             bsModal.hide();

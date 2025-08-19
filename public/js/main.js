@@ -56,7 +56,7 @@ document.querySelectorAll('.number').forEach(btn =>
         }
 
         //  display 
-        ShowCalculateReusltOnScreen();
+        ShowResultOnScreen();
         
 }))
 
@@ -84,7 +84,7 @@ document.getElementById('floatDot').addEventListener('click', function(){
     }
 
     // diplay
-    ShowCalculateReusltOnScreen();
+    ShowResultOnScreen();
     
 })
 
@@ -97,7 +97,7 @@ document.querySelectorAll('.operator').forEach(btn =>
         if(cur_operand.value !== ""){
             console.log(`Calculate and show, then set right_operand to left_operand.`);
             Calculate(operator);
-            ShowCalculateReusltOnScreen();
+            ShowResultOnScreen();
         }
 
         operator = event.target.id;
@@ -109,7 +109,7 @@ document.querySelectorAll('.operator').forEach(btn =>
 document.getElementById('equal').addEventListener('click', function(){
 
     Calculate(operator);
-    ShowCalculateReusltOnScreen();
+    ShowResultOnScreen();
 })
 
 //  % 
@@ -131,25 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById('countries-data');
     if(!el) return;
     countries = JSON.parse(el.textContent || '[]');
-
-    InitExchangeRates();
 });
 
 
 
 /* ------------------- function ------------------- */
-//  初始化國家匯率
-function InitExchangeRates(){
-    major = countries.find( c => c.cca3 === "TWN");
-    minor = countries.find( c => c.cca3 === "USA");
-
-    major_img.src = major.flags;
-    major_img.dataset.code = major.cca3;
-
-    minor_img.src = minor.flags;
-    minor_img.dataset.code = minor.cca3;
-
-}
 
 //  貨幣轉換
 function Convertor(val){
@@ -174,7 +160,6 @@ function CheckMaximumDisplay(str){
         return false;
     }
 }
-
 
 function Calculate(operator){
 
@@ -216,14 +201,6 @@ function Reset(res){
     right_operand.value = "";
     operator = "";
 }
-
-function ShowCalculateReusltOnScreen(){
-
-    // if(operator === ""){
-        ShowResultOnScreen();
-    // }
-}
-
 
 function ShowResultOnScreen(){
     major_inputBox.textContent = cur_operand.value;
