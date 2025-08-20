@@ -33,6 +33,8 @@ app.use('/index', (req, res, next) =>{
     req.status = getStatus();
     req.countries = bindingRatioAndCountry(getCountries());
     
+    req.majorData = req.countries.find(c => c.cca3 === "TWN");
+    req.minorData = req.countries.find(c => c.cca3 === "USA");
     next();
 });
 
