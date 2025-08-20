@@ -153,7 +153,7 @@ function Convertor(val){
 
 //  檢查最大顯示長度
 function CheckMaximumDisplay(str){
-    if(str.length === 19){
+    if(str.length >= 19){
         return true;
     }
     else{
@@ -204,6 +204,41 @@ function Reset(res){
 
 function ShowResultOnScreen(){
     major_inputBox.textContent = cur_operand.value;
-    minor_inputBox.textContent = String(Convertor(cur_operand.value));
+    let minor_str = String(Convertor(cur_operand.value));
+
+    isMaximum = CheckMaximumDisplay(minor_str);
+    if(isMaximum){
+        minor_str = RoundToMaxLength(minor_str);
+    }
+    console.log(minor_str);
+    minor_inputBox.textContent = minor_str;
+
 }
 
+function RoundToMaxLength(str, MaxLen = 19){
+
+    //  把科學記號 +e  轉純數字字串
+    const num = new Decimal(str);
+    str = num.toString();
+
+    if(str.length <= 19) return str;
+    if(!str.includes('.') || num > 9999_9999_9999_9999_999){
+        return "9999999999999999999";
+    }
+
+    //  有小數點 且長度超過19
+    const val = str.slice(0, 20);
+    const dotIndex = val.indexOf('.');
+    let output = new Decimal(val);
+    let decimalPlaces = 0;
+
+    //  如果'.'不在長度20的位置，就計算'.'到長度20位置的距離
+    if(dotIndex < 19){
+        decimalPlaces = Math.max(0, 19 - dotIndex - 1);
+    }
+
+    output.toDecimalPlaces(decimalPlaces, Decimal.ROUND_HALF_UP);
+    output.toString().slice(0, 19);
+
+    return output;
+}
