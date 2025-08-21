@@ -114,7 +114,7 @@ document.getElementById('equal').addEventListener('click', function(){
 })
 
 //  % 
-document.getElementById('persent').addEventListener('click', function(){
+document.getElementById('percent').addEventListener('click', function(){
     if(cur_operand.value === "0"){
         return;
     }
