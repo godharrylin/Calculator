@@ -10,6 +10,7 @@ const major_img = document.getElementById('major-img');
 const minor_img = document.getElementById('minor-img');
 const major_inputBox = document.getElementById('major');
 const minor_inputBox = document.getElementById('minor');
+const rate_info = document.getElementById('rate-info');
 
 
 /* --------------------- click evnet of buttons ----------------------- */
@@ -113,7 +114,7 @@ document.getElementById('equal').addEventListener('click', function(){
 })
 
 //  % 
-document.getElementById('persent').addEventListener('click', function(){
+document.getElementById('percent').addEventListener('click', function(){
     if(cur_operand.value === "0"){
         return;
     }
@@ -125,7 +126,6 @@ document.getElementById('persent').addEventListener('click', function(){
 
 })
 
-
 //  載入DOM後，解析 countries data
 document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById('countries-data');
@@ -133,7 +133,43 @@ document.addEventListener('DOMContentLoaded', () => {
     countries = JSON.parse(el.textContent || '[]');
 });
 
+/* ------------------- 觀察者監聽 ------------------- */
+observer = new MutationObserver((mutations) => {
+    mutations.forEach(mutation => {
+        if(mutation.type === 'attributes' && mutation.attributeName === 'data-code'){
+            const target = mutation.target;
+            const attr = mutation.attributeName;
+            const oldValue = mutation.oldValue;
+            const newValue = target.getAttribute(attr);
 
+            console.log(`元素 ${target.id} 的 ${attr} 屬性變了 -> 變化前：${oldValue}  變化後：${newValue}`);
+            
+            const getCurrencyInfo = (countryCode) => {
+                const country = countries.find(c => c.cca3 === countryCode);
+                const currencyKey = Object.keys(country.currencies)[0];
+                const rate = new Decimal(country.currencies[currencyKey]);
+                return {currencyKey, rate};
+            };
+            
+            const major = getCurrencyInfo(major_img.dataset.code);
+            const minor = getCurrencyInfo(minor_img.dataset.code);
+
+            const ratio = minor.rate.dividedBy(major.rate).toDecimalPlaces(2, Decimal.ROUND_HALF_UP);
+
+            rate_info.textContent = `1 ${major.currencyKey} = ${ratio} ${minor.currencyKey}`;
+
+        }
+    });
+});
+
+const config = {
+    attribute: true,
+    attributeOldValue: true,
+    attributeFilter: ['data-code']
+}
+
+observer.observe(major_img, config);
+observer.observe(minor_img, config);
 
 /* ------------------- function ------------------- */
 
@@ -221,24 +257,24 @@ function RoundToMaxLength(str, MaxLen = 19){
     const num = new Decimal(str);
     str = num.toString();
 
-    if(str.length <= 19) return str;
+    if(str.length <= MaxLen) return str;
     if(!str.includes('.') || num > 9999_9999_9999_9999_999){
         return "9999999999999999999";
     }
 
     //  有小數點 且長度超過19
-    const val = str.slice(0, 20);
+    const val = str.slice(0, MaxLen + 1);
     const dotIndex = val.indexOf('.');
     let output = new Decimal(val);
     let decimalPlaces = 0;
 
     //  如果'.'不在長度20的位置，就計算'.'到長度20位置的距離
-    if(dotIndex < 19){
-        decimalPlaces = Math.max(0, 19 - dotIndex - 1);
+    if(dotIndex < MaxLen){
+        decimalPlaces = Math.max(0, MaxLen - dotIndex - 1);
     }
 
     output.toDecimalPlaces(decimalPlaces, Decimal.ROUND_HALF_UP);
-    output.toString().slice(0, 19);
+    output.toString().slice(0, MaxLen);
 
     return output;
 }
