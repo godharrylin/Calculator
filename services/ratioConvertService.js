@@ -1,10 +1,15 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const apiKey = process.env.EXCHANGE_RATE_API_KEY;
 let ratioList = [];
 
 export async function preloadRatioData(){
     
     //  base currency is USD
     const url = new URL(`https://openexchangerates.org/api/latest.json`);
-    url.searchParams.set('app_id', 'bb14367c51564f508d90a15f70c80a77');
+    url.searchParams.set('app_id', `${apiKey}`);
 
     console.log('fetching the ratio data.');
     const res = await fetch(url.toString());

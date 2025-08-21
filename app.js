@@ -2,7 +2,7 @@ import express from 'express';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { preloadCountries, getCountries } from './services/countriesService.js'
-import { preloadRatioData, bindingRatioAndCountry } from './services/ratioConverService.js'
+import { preloadRatioData, bindingRatioAndCountry } from './services/ratioConvertService.js'
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
